@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author 1886519
@@ -20,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 public class SakilaUI extends javax.swing.JFrame {
     
     private final CustomerDAO dao;
-
     /**
      * Creates new form SakilaUI
      */
@@ -278,43 +278,63 @@ public class SakilaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        //TODO add your handling code here:
         //int x = jTable1.getSelectedRow();
+        //jTable1.getValueAt(x, 0);
+        //jTable1.getValueAt(x, 1);
         //jTable1.getValueAt(x, 2);
         //jTable1.getValueAt(x, 3);
         //jTable1.getValueAt(x, 4);
         //jTable1.getValueAt(x, 5);
-        
+        //jTable1.getValueAt(x, 6);
         int i = jTable1.getSelectedRow();
+          
         
+
+
         if (i != -1) {
-            updateUI sei_la = null;
-           // Customer sei_la2 = new Customer(this, );
+            JOptionPane.showMessageDialog(null,
+            jTable1.getValueAt(i, 2)+ " " +jTable1.getValueAt(i, 3),
+            "atualizar", 
+            JOptionPane.INFORMATION_MESSAGE);         
+        } else {
+        JOptionPane.showMessageDialog(null, 
+        "SElecione uma linha", 
+        "atualizar",
+        JOptionPane.WARNING_MESSAGE);
+        }
+           updateUI sei_la = null;
         try {
-            sei_la = new updateUI((int)jTable1.getValueAt(i,0));
+//Customer sei_la2 = new Customer(this, );
+//try {
+        sei_la = new updateUI((int)jTable1.getValueAt(i,0));
         } catch (SQLException ex) {
             Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //} catch (SQLException ex) {
+          //  Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         sei_la.setVisible(true);
         setVisible(false);
         
-        updateUI u;
-        try {
-            u = new updateUI();
-            u.setVisible(true);
-        setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }else {
-            JOptionPane.showConfirmDialog(null,
-                    "Selecione uma linha",
-                     "update",
-                     JOptionPane.WARNING_MESSAGE);
-        }
+        //updateUI u;
+        //try {
+         //   u = new updateUI();
+           // u.setVisible(true);
+        //setVisible(false);
+        ///} catch (SQLException ex) {
+         //   Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
+        //}
+        //}else {
+          //  JOptionPane.showConfirmDialog(null,
+            //        "Selecione uma linha",
+              //       "update",
+                //     JOptionPane.WARNING_MESSAGE);
+        
+
         
         
-        
+         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -361,7 +381,7 @@ public class SakilaUI extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+              }
         });
     }
 
@@ -379,3 +399,4 @@ public class SakilaUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+

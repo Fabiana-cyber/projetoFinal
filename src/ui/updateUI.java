@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import ui.SakilaUI;
-import ui.add;
 
 
 /**
@@ -23,12 +21,14 @@ import ui.add;
 public class updateUI extends javax.swing.JFrame {
     CustomerDAO dao;
     int id;
+   private Customer C;
     /**
      * Creates new form updateUI
      * @throws java.sql.SQLException
      */
     public updateUI() throws SQLException {
         initComponents();
+        setLocationRelativeTo(null);
         dao = new CustomerDAO();
     }
     
@@ -36,6 +36,7 @@ public class updateUI extends javax.swing.JFrame {
         initComponents();
         dao = new CustomerDAO();
         this.id = id;
+        
     }
 
 
@@ -247,21 +248,25 @@ public class updateUI extends javax.swing.JFrame {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        SakilaUI s = null;
         try {
-            SakilaUI s = new SakilaUI();
-            s.setVisible(true);
-            setVisible(false);
+            s = new SakilaUI();
         } catch (SQLException ex) {
-            Logger.getLogger(add.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        s.setVisible(true);
+        setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        
          int rb1 = 0;
+         //jTable1 jTable1 =0;
          //int id = 0; 
-
+         
         if (jRadioButton1.isSelected()) {
             rb1 = 1;
         } else if(jRadioButton2.isSelected()){
@@ -282,13 +287,14 @@ public class updateUI extends javax.swing.JFrame {
         }else {
              try {
                  
-                 dao.updateCustomer(id, new Customer(
+                 dao.updateCustomer (id, new Customer  ( 
                     jComboBox1.getSelectedIndex(),
                     jTextField1.getText(),
                     jTextField2.getText(),
                     jTextField3.getText(),
                     jSlider1.getValue(),
                     rb1));
+                  
                  
                  SakilaUI s = new SakilaUI();
                  s.setVisible(true);
@@ -297,7 +303,7 @@ public class updateUI extends javax.swing.JFrame {
                  Logger.getLogger(updateUI.class.getName()).log(Level.SEVERE, null, ex);
              }
                 
-            }
+        }
           
         
     }//GEN-LAST:event_jButton2ActionPerformed
