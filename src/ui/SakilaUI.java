@@ -28,8 +28,11 @@ public class SakilaUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.dao = new CustomerDAO();
+        boolean act = false; 
+        int desc = -1;
     }
-
+    int desc;
+    boolean act;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +50,6 @@ public class SakilaUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
 
@@ -120,16 +122,13 @@ public class SakilaUI extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton5.setText("FILTRAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCheckBox2.setText("Active");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         jCheckBox3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCheckBox3.setText("Decrescente");
@@ -148,22 +147,16 @@ public class SakilaUI extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox3)
-                        .addGap(23, 23, 23))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5)
-                            .addComponent(jCheckBox2))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox3))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,16 +164,14 @@ public class SakilaUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
+                        .addGap(18, 18, 18)
                         .addComponent(jCheckBox2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
+                        .addComponent(jCheckBox3)))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -200,7 +191,7 @@ public class SakilaUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,9 +205,22 @@ public class SakilaUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
+//Filtro para ativos e ordem decrescente
+            if (jCheckBox2.isSelected()){
+                act = true;
+            }else {
+                act = false;
+            }
             
-            List<Customer> lista = dao.getCustomers();
-            
+            if (jCheckBox3.isSelected()){
+                desc = -1;
+            }else{
+                desc = 1;
+            } 
+//Lista de visualização com as variaveis dos filtros         
+            List<Customer> lista = dao.getCustomers( act,  desc);
+        
+ 
             DefaultTableModel dtm
                     = (DefaultTableModel) jTable1.getModel();
             
@@ -242,10 +246,22 @@ public class SakilaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+// código de deletar 
         int i = jTable1.getSelectedRow();
         int id = 0;
         if (i != -1) {
-            id = (int) jTable1.getValueAt(i,0);
+            int choice = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete this customer?\n"
+                    + "ID: " + jTable1.getValueAt(i, 0) + "\n"
+                    + "Name: " + jTable1.getValueAt(i, 2) + " " + jTable1.getValueAt(i, 3) + "\n"
+                    + "E-mail: " + jTable1.getValueAt(i, 4),
+                    "DELETE CUSTOMER",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+            if (choice == JOptionPane.YES_OPTION) {
+               id = (int) jTable1.getValueAt(i,0);
             try {
             JOptionPane.showMessageDialog(
                     null,
@@ -255,6 +271,10 @@ public class SakilaUI extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+            } else {
+                JOptionPane.showMessageDialog(null, "Deletion canceled!");
+            }
+            
         } else {
             JOptionPane.showMessageDialog(
                 null, 
@@ -266,6 +286,8 @@ public class SakilaUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
+// botão de adicionar, comando para a interface sakila ficar invisivel, enquanto a add fica visivel
         add a = null;
         try {
             a = new add();
@@ -273,78 +295,42 @@ public class SakilaUI extends javax.swing.JFrame {
             Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         a.setVisible(true);
-        setVisible(false);
-        
+        setVisible(false);   
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         //TODO add your handling code here:
-        //int x = jTable1.getSelectedRow();
-        //jTable1.getValueAt(x, 0);
-        //jTable1.getValueAt(x, 1);
-        //jTable1.getValueAt(x, 2);
-        //jTable1.getValueAt(x, 3);
-        //jTable1.getValueAt(x, 4);
-        //jTable1.getValueAt(x, 5);
-        //jTable1.getValueAt(x, 6);
-        int i = jTable1.getSelectedRow();
-          
         
-
-
+//  Botão de atualizar
+        int i = jTable1.getSelectedRow();
+        updateUI sei_la = null;
+        
         if (i != -1) {
             JOptionPane.showMessageDialog(null,
             jTable1.getValueAt(i, 2)+ " " +jTable1.getValueAt(i, 3),
-            "atualizar", 
-            JOptionPane.INFORMATION_MESSAGE);         
-        } else {
-        JOptionPane.showMessageDialog(null, 
-        "SElecione uma linha", 
-        "atualizar",
-        JOptionPane.WARNING_MESSAGE);
-        }
-           updateUI sei_la = null;
-        try {
-//Customer sei_la2 = new Customer(this, );
-//try {
+            "Atualizar", 
+            JOptionPane.INFORMATION_MESSAGE);  
+            
+            try {
         sei_la = new updateUI((int)jTable1.getValueAt(i,0));
         } catch (SQLException ex) {
             Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //} catch (SQLException ex) {
-          //  Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
-        //}
         sei_la.setVisible(true);
-        setVisible(false);
-        
-        //updateUI u;
-        //try {
-         //   u = new updateUI();
-           // u.setVisible(true);
-        //setVisible(false);
-        ///} catch (SQLException ex) {
-         //   Logger.getLogger(SakilaUI.class.getName()).log(Level.SEVERE, null, ex);
-        //}
-        //}else {
-          //  JOptionPane.showConfirmDialog(null,
-            //        "Selecione uma linha",
-              //       "update",
-                //     JOptionPane.WARNING_MESSAGE);
-        
-
-        
-        
-         
+        setVisible(false);  
+        } else {
+            JOptionPane.showMessageDialog(null, 
+            "SELECIONE UMA LINHA", 
+            "ATUALIZAR",
+            JOptionPane.WARNING_MESSAGE);
+        }
+           
+           
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
-        if(jCheckBox2.isSelected()){
-            
-        }else{
-            
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,7 +376,6 @@ public class SakilaUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;

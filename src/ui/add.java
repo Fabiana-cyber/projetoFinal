@@ -259,6 +259,7 @@ public class add extends javax.swing.JFrame {
         
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+// botao de inserir
         int rb1 = 0;
         if (jRadioButton1.isSelected()) {
             rb1 = 1;
@@ -300,22 +301,16 @@ public class add extends javax.swing.JFrame {
             Logger.getLogger(add.class.getName()).log(Level.SEVERE, null, ex);
         }
             }
-        }
-        
-        
-        
-        
-        
-
-        
-                
-            
-        
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Inserção cancelada", "INSERT CUSTOMER", JOptionPane.INFORMATION_MESSAGE);
+// botao de cancelar
+        JOptionPane.showMessageDialog(null, 
+                "Inserção cancelada",
+                "INSERT CUSTOMER", 
+                JOptionPane.ERROR_MESSAGE);
         try {
             SakilaUI s = new SakilaUI();
             s.setVisible(true);
@@ -342,6 +337,7 @@ public class add extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
+//acao para mudar a cor de fundo com o jSlider
         jTextField4.setText(jSlider1.getValue()+ "");
          colorupdate();
     }//GEN-LAST:event_jSlider1StateChanged

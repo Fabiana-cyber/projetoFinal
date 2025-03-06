@@ -71,7 +71,7 @@ public class CustomerDAO {
         pst.setString(4, c.getEmail());
         pst.setInt(5, c.getAddress_id());
         pst.setInt(6, c.getActive());
-        pst.setInt(7, c.getCustomer_id());
+        pst.setInt(7, id);
 
         pst.execute();
         pst.close();
@@ -81,9 +81,7 @@ public class CustomerDAO {
     public void showCustomers() throws SQLException {
         Statement st = con.createStatement();
         
-        String query = "select * from customer"
-                + " order by customer_id desc"
-                + " limit 5";
+        String query = "select * from customer ";
 
         ResultSet rs = st.executeQuery(query);
 
@@ -106,14 +104,23 @@ public class CustomerDAO {
         st.close();
     }
 
-    public List<Customer> getCustomers() throws SQLException {
+    public List<Customer> getCustomers(boolean act, int desc) throws SQLException {
         List<Customer> lista = 
                 new ArrayList<Customer>();
 
         Statement st = con.createStatement();
         
-        String query = "select * from customer"
-                + " order by customer_id desc";
+        String query = "select * from customer";
+        
+        if (act){
+        query += " where active = 1";   
+        }
+        
+        if(desc == -1){
+        query += " order by customer_id desc";
+    }else{
+        query += " order by customer_id asc"; 
+        }
 
         ResultSet rs = st.executeQuery(query);
 

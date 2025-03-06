@@ -8,7 +8,6 @@ import dao.Customer;
 import dao.CustomerDAO;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +20,9 @@ import javax.swing.JOptionPane;
 public class updateUI extends javax.swing.JFrame {
     CustomerDAO dao;
     int id;
-   private Customer C;
+    private int customerId;
+    
+   //private Customer C;
     /**
      * Creates new form updateUI
      * @throws java.sql.SQLException
@@ -240,6 +241,7 @@ public class updateUI extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
+// acao para mudar a cor com jslider
         jTextField4.setText(jSlider1.getValue()+ "");
          colorupdate();
     }//GEN-LAST:event_jSlider1StateChanged
@@ -248,9 +250,16 @@ public class updateUI extends javax.swing.JFrame {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+// botao de cancelar atualização
         SakilaUI s = null;
         try {
             s = new SakilaUI();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Atualização Cancelada!",
+                    "UPDATE CUSTOMER",
+                    JOptionPane.ERROR_MESSAGE
+            );
         } catch (SQLException ex) {
             Logger.getLogger(updateUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -261,12 +270,9 @@ public class updateUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        
-         int rb1 = 0;
-         //jTable1 jTable1 =0;
-         //int id = 0; 
-         
+// botão de atualizar
+        int rb1 = 0;
+           
         if (jRadioButton1.isSelected()) {
             rb1 = 1;
         } else if(jRadioButton2.isSelected()){
@@ -295,6 +301,10 @@ public class updateUI extends javax.swing.JFrame {
                     jSlider1.getValue(),
                     rb1));
                   
+                    JOptionPane.showMessageDialog(
+                    null,
+                    "Atualizado com sucesso!"
+            );
                  
                  SakilaUI s = new SakilaUI();
                  s.setVisible(true);

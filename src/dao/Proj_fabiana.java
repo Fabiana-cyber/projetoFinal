@@ -19,14 +19,6 @@ public class Proj_fabiana {
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
 
-        Customer c = new Customer(1, "Dalai", "Lama", "dalai@microsoft.com", 10, 1);
 
-        CustomerDAO dao = new CustomerDAO();
-
-//        dao.insertCustomer(c);
-//        dao.updateCustomer(611);
-//        dao.deleteCustomer(610);
-//        dao.showCustomers();
-        System.out.println(dao.getCustomers());
     }
 }
